@@ -1,0 +1,13 @@
+# API
+fastapi         # API framework
+uvicorn         # web server
+# tests
+httpx           # HTTP client
+
+#Other
+gensim.models.Doc2Vec      # for Doc2Vec model
+nltk           # for word_tokenize
+gensim.models.TaggedDocument # for Doc2Vec
+re
+word_tokenize # for word_tokenize
+```

@@ -4,6 +4,8 @@ from ml_learn.preprocess import preprocess_text
 from gensim.models.doc2vec import Doc2Vec
 import pandas as pd
 
+#Descargar la libreria de GCloud para blops y buckets
+
 app = FastAPI()
 
 # Load the model

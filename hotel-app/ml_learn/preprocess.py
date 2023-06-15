@@ -6,32 +6,28 @@ import re
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv('../data/Hotel_Reviews.csv')
+df = pd.read_csv('./data/Hotel_Reviews.csv')
 
 def cleaner(df):
-    df.dropna(subset=['lat', 'lng'],inplace=True)
+    df.dropna(subset=['lat', 'lng']).reset_index(drop=True,inplace=True)
     df.columns = df.columns.str.lower()
-    columns_to_remove = ['hotel_address', 'additional_number_of_scoring', 'review_date', 'average_score',
-                         'reviewer_nationality', 'review_total_negative_word_counts', 'total_number_of_reviews',
+    columns_to_remove = ['additional_number_of_scoring', 'review_date', 'average_score',
+                         'reviewer_nationality','negative_review', 'review_total_negative_word_counts', 'total_number_of_reviews',
                          'review_total_positive_word_counts', 'total_number_of_reviews_reviewer_has_given', 'tags',
-                         'days_since_review', 'lat', 'lng']
+                         'days_since_review']
     df = df.drop(columns=columns_to_remove)
-    # Replace 'no negative' with an empty string
-    df['negative_review'] = df['negative_review'].replace('No Negative', '')
 
     # Replace 'no positive' with an empty string
-    df['positive_review'] = df['positive_review'].replace('No Positive', '')
-
-    # Combine positive and negative reviews into a new column
-    df['combined_review'] = df['positive_review'] + ' ' + df['negative_review']
-
-    # Drop the individual positive and negative review columns
-    df = df.drop(['positive_review', 'negative_review'], axis=1)
-
+   # df['positive_review'] = df['positive_review'].replace('No Positive', '')
+    df = df[df['positive_review'] != 'No Positive']
+    df.rename(columns={'positive_review': 'review'}, inplace=True)
 
     return df
 
 def preprocess_text(text):
+
+    stop_words = set(stopwords.words('english'))
+    lemmatizer = WordNetLemmatizer()
 
     text = re.sub(r'[^a-zA-Z\s]', '', text.lower())
     tokens = word_tokenize(text)

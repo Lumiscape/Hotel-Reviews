@@ -1,0 +1,7 @@
+fastapi
+google-cloud-storage
+pandas
+numpy
+nltk
+uvicorn
+gensim

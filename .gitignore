@@ -1,0 +1,8 @@
+raw_data/
+ipynb_checkpoints/.
+data/
+__pycache__/
+../.DS_Store
+hotelapp/api/model.pkl
+hotelapp/api/df_clean.csv
+service_account_key.json

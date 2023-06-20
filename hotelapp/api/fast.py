@@ -69,7 +69,7 @@ def search_hotels(search_query: str, country: str):
     query_vector = model.infer_vector(preprocessed_query.split())
 
     # Find the most similar vectors to the query vector
-    similar_vectors = model.dv.most_similar(positive=[query_vector], topn=20)
+    similar_vectors = model.dv.most_similar(positive=[query_vector], topn=1247)
 
     # Create a list with the first element of the tuples (which correspond to the index in the DF)
     sv = [doc[0] for doc in similar_vectors]

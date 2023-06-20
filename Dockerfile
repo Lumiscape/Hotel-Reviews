@@ -18,4 +18,4 @@ COPY . .
 ENV GOOGLE_APPLICATION_CREDENTIALS=/app/service_account_key.json
 
 # Run the FastAPI application using uvicorn
-CMD ["uvicorn", "hotelapp.api.fast:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "hotelapp.api.fast:app", "--host", "0.0.0.0", "--port", "8080"]

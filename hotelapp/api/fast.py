@@ -55,7 +55,7 @@ async def load_model_and_dataframe():
 
 
 @app.get("/search")
-def search_hotels(search_query: str):
+def search_hotels(search_query: str, country: str):
     model = app.state.model # Get the model from the state
     df = app.state.df # Get the dataframe from the state
     """Return the list of hotels with their name, address, latitude, and longitude"""
@@ -77,8 +77,10 @@ def search_hotels(search_query: str):
     # Retrieve the corresponding rows from the original DataFrame based on the similar vectors and make a new DF
     df_filtered = df[df.index.isin(sv)].reindex(sv)
 
+    df_filtered_2 = df_filtered[df_filtered['country'] == country].head(20)
+
     # Convert the search results of the filtered DataFrame to a list of dictionaries
     # with each dictionary representing a hotel and its attributes
-    dict_to_map  =  df_filtered.to_dict(orient="records")
+    dict_to_map  =  df_filtered_2.to_dict(orient="records")
 
     return dict_to_map
